@@ -88,15 +88,15 @@ public class MatrixTest{
 
 		Matrix expected = Matrix.initializeMatrix(3,3);
 
-		expected.addElement(30,0,0);
-		expected.addElement(36,0,1);
-		expected.addElement(42,0,2);
-		expected.addElement(66,1,0);
-		expected.addElement(81,1,1);
-		expected.addElement(96,1,2);
-		expected.addElement(102,2,0);
-		expected.addElement(126,2,1);
-		expected.addElement(150,2,2);
+		expected.addElement(300,0,0);
+		expected.addElement(360,0,1);
+		expected.addElement(420,0,2);
+		expected.addElement(660,1,0);
+		expected.addElement(810,1,1);
+		expected.addElement(960,1,2);
+		expected.addElement(1020,2,0);
+		expected.addElement(1260,2,1);
+		expected.addElement(1500,2,2);
 
 		assertTrue(product.isEqualsWith(expected));	
 	}

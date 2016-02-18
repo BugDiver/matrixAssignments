@@ -5,9 +5,9 @@ class Matrix{
 	private int[][] data;
 
 	private Matrix(int row ,int col){
-		row = row;
-		col =  col;
-		data = new int[row][col];
+		this.row = row;
+		this.col =  col;
+		this.data = new int[row][col];
 	}
 	public static Matrix initializeMatrix(int row ,int col){
 		return new Matrix(row ,col);
@@ -30,8 +30,9 @@ class Matrix{
 	public boolean isEqualsWith(Matrix matrix){
 		for (int i = 0; i < row; i++){
             for (int j = 0; j < col; j++){
-                if(data[i][j] !=  matrix.data[i][j])
+                if(data[i][j] !=  matrix.data[i][j]){
                 	return false;
+                }
             }
         }
         return true;
@@ -47,12 +48,11 @@ class Matrix{
         return result;
     }
     public Matrix multiply(Matrix matrix) {
-        Matrix result = new Matrix(row, matrix.col);
+        Matrix result = new Matrix(this.row, matrix.col);
         for (int i = 0; i < result.row; i++){
             for (int j = 0; j < result.col; j++){
                 for (int k = 0; k < col; k++){
-                	int element = (data[i][k] * matrix.data[k][j]);
-                	result.addElement(element ,i ,j); 
+                	result.data[i][j] += this.data[i][k] * matrix.data[k][j]; 
                 }
             }
         }
