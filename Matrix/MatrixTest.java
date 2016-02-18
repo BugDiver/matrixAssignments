@@ -15,34 +15,14 @@ public class MatrixTest{
 		matrix.addElement(8,2,1);
 		matrix.addElement(9,2,2);
 	}
-	public void fillMatrixWithAnotherSampleValues(Matrix matrix){
-		matrix.addElement(10,0,0);
-		matrix.addElement(20,0,1);
-		matrix.addElement(30,0,2);
-		matrix.addElement(40,1,0);
-		matrix.addElement(50,1,1);
-		matrix.addElement(60,1,2);
-		matrix.addElement(70,2,0);
-		matrix.addElement(80,2,1);
-		matrix.addElement(90,2,2);
-	}
 	@Test
-	public void testCreateMatrix(){
-		Matrix matrix1 = Matrix.createMatrix(3,3);
-
-		assertEquals(matrix1.getElement(0,0) ,0);
-		assertEquals(matrix1.getElement(0,1) ,0);
-		assertEquals(matrix1.getElement(0,2) ,0);
-		assertEquals(matrix1.getElement(1,0) ,0);
-		assertEquals(matrix1.getElement(1,1) ,0);
-		assertEquals(matrix1.getElement(1,2) ,0);
-		assertEquals(matrix1.getElement(2,0) ,0);
-		assertEquals(matrix1.getElement(2,1) ,0);
-		assertEquals(matrix1.getElement(2,2) ,0);
+	public void testinitializeMatrix(){
+		Matrix matrix1 = Matrix.initializeMatrix(3,3);
+		assertTrue(matrix1.isNullMatrix());
 	}
 	@Test
 	public void testPopulateMatrix(){
-		Matrix matrix1 = Matrix.createMatrix(3,3);
+		Matrix matrix1 = Matrix.initializeMatrix(3,3);
 		//siganture addElement(value ,rowPosition ,columnPosition);
 		matrix1.addElement(1,0,0);
 		matrix1.addElement(3,0,2);
@@ -61,8 +41,8 @@ public class MatrixTest{
 	}
 	@Test
 	public void testEqualityOfMatrices() {
-		Matrix matrix1 = Matrix.createMatrix(3,3);
-		Matrix matrix2 = Matrix.createMatrix(3,3);
+		Matrix matrix1 = Matrix.initializeMatrix(3,3);
+		Matrix matrix2 = Matrix.initializeMatrix(3,3);
 
 		fillMatrixWithSampleValues(matrix1);
 		fillMatrixWithSampleValues(matrix2);
@@ -72,28 +52,82 @@ public class MatrixTest{
 	@Test
 	public void testAddTwoMatrices(){
 
-		Matrix matrix1 = Matrix.createMatrix(3,3);
+		Matrix matrix1 = Matrix.initializeMatrix(3,3);
 		fillMatrixWithSampleValues(matrix1);
 
-		Matrix matrix2 = Matrix.createMatrix(3,3);
-		fillMatrixWithAnotherSampleValues(matrix2);
+		Matrix matrix2 = matrix1.multiply(10);
 
 		//add two matrices
 		Matrix addition = matrix2.add(matrix1);
 
-		Matrix excepted = Matrix.createMatrix(3,3);
+		Matrix expected = Matrix.initializeMatrix(3,3);
 
-		excepted.addElement(11,0,0);
-		excepted.addElement(22,0,1);
-		excepted.addElement(33,0,2);
-		excepted.addElement(44,1,0);
-		excepted.addElement(55,1,1);
-		excepted.addElement(66,1,2);
-		excepted.addElement(77,2,0);
-		excepted.addElement(88,2,1);
-		excepted.addElement(99,2,2);
+		expected.addElement(11,0,0);
+		expected.addElement(22,0,1);
+		expected.addElement(33,0,2);
+		expected.addElement(44,1,0);
+		expected.addElement(55,1,1);
+		expected.addElement(66,1,2);
+		expected.addElement(77,2,0);
+		expected.addElement(88,2,1);
+		expected.addElement(99,2,2);
 
-		assertTrue(addition.isEqualsWith(excepted));
+		assertTrue(addition.isEqualsWith(expected));
 		
+	}
+	@Test
+	public void testMultiplyTwoMatrices(){
+
+		Matrix matrix1 = Matrix.initializeMatrix(3,3);
+		fillMatrixWithSampleValues(matrix1);
+
+		Matrix matrix2 = matrix1.multiply(10);
+
+		//multiply two matrices
+		Matrix product = matrix2.multiply(matrix1);
+
+		Matrix expected = Matrix.initializeMatrix(3,3);
+
+		expected.addElement(30,0,0);
+		expected.addElement(36,0,1);
+		expected.addElement(42,0,2);
+		expected.addElement(66,1,0);
+		expected.addElement(81,1,1);
+		expected.addElement(96,1,2);
+		expected.addElement(102,2,0);
+		expected.addElement(126,2,1);
+		expected.addElement(150,2,2);
+
+		assertTrue(product.isEqualsWith(expected));	
+	}
+	@Test
+	public void testScalerMultiplication(){
+
+		Matrix matrix1 = Matrix.initializeMatrix(3,3);
+		fillMatrixWithSampleValues(matrix1);
+
+		Matrix scaledMatrix = matrix1.multiply(10);
+
+		Matrix expected = Matrix.initializeMatrix(3,3);
+
+		expected.addElement(10,0,0);
+		expected.addElement(20,0,1);
+		expected.addElement(30,0,2);
+		expected.addElement(40,1,0);
+		expected.addElement(50,1,1);
+		expected.addElement(60,1,2);
+		expected.addElement(70,2,0);
+		expected.addElement(80,2,1);
+		expected.addElement(90,2,2);
+
+		assertTrue(scaledMatrix.isEqualsWith(expected));	
+	}
+	@Test
+	public void testDeterminantOfMatrix(){
+		Matrix matrix1 = Matrix.initializeMatrix(3,3);
+		fillMatrixWithSampleValues(matrix1);
+
+		int determinant = matrix1.determinant();
+		assertEquals(determinant , 0);
 	}
 }
