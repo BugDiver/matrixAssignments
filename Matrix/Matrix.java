@@ -1,7 +1,7 @@
 class Matrix{
 
-	public int row;
-	public int col;
+	private int row;
+	private int col;
 	private int[][] data;
 
 	private Matrix(int row ,int col){
@@ -17,6 +17,15 @@ class Matrix{
 	}
 	public int getElement(int rowPos ,int colPos){
 		return this.data[rowPos][colPos];
+	}
+	public boolean isEqualsWith(Matrix matrix){
+		for (int i = 0; i < this.row; i++){
+            for (int j = 0; j < this.col; j++){
+                if(this.data[i][j] !=  matrix.data[i][j])
+                	return false;
+            }
+        }
+        return true;
 	}
 	public Matrix add(Matrix other) {
         Matrix result = new Matrix(this.row, this.col);
