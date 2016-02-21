@@ -47,7 +47,7 @@ public class MatrixTest{
 		fillMatrixWithSampleValues(matrix1);
 		fillMatrixWithSampleValues(matrix2);
 
-		assertTrue(matrix1.isEqualsWith(matrix2));
+		assertTrue(matrix1.isEqualsTo(matrix2));
 	}
 	@Test
 	public void testAddTwoMatrices(){
@@ -72,7 +72,7 @@ public class MatrixTest{
 		expected.addElement(88,2,1);
 		expected.addElement(99,2,2);
 
-		assertTrue(addition.isEqualsWith(expected));
+		assertTrue(addition.isEqualsTo(expected));
 		
 	}
 	@Test
@@ -98,7 +98,7 @@ public class MatrixTest{
 		expected.addElement(1260,2,1);
 		expected.addElement(1500,2,2);
 
-		assertTrue(product.isEqualsWith(expected));	
+		assertTrue(product.isEqualsTo(expected));	
 	}
 	@Test
 	public void testScalerMultiplication(){
@@ -120,7 +120,7 @@ public class MatrixTest{
 		expected.addElement(80,2,1);
 		expected.addElement(90,2,2);
 
-		assertTrue(scaledMatrix.isEqualsWith(expected));	
+		assertTrue(scaledMatrix.isEqualsTo(expected));	
 	}
 	@Test
 	public void testDeterminantOfMatrix(){

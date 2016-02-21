@@ -27,7 +27,7 @@ class Matrix{
 	public int getElement(int rowPos ,int colPos){
 		return data[rowPos][colPos];
 	}
-	public boolean isEqualsWith(Matrix matrix){
+	public boolean isEqualsTo(Matrix matrix){
 		for (int i = 0; i < row; i++){
             for (int j = 0; j < col; j++){
                 if(data[i][j] !=  matrix.data[i][j]){
