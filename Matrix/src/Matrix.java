@@ -27,6 +27,11 @@ class Matrix{
 	public int getElement(int rowPos ,int colPos){
 		return data[rowPos][colPos];
 	}
+    public void populateByRow(int position,int[] rowData){
+        for (int i= 0;i<col ;i++ ) {
+            data[position][i] = rowData[i];
+        }
+    }
 	public boolean isEqualsTo(Matrix matrix){
 		for (int i = 0; i < row; i++){
             for (int j = 0; j < col; j++){

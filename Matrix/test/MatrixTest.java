@@ -130,4 +130,70 @@ public class MatrixTest{
 		int determinant = matrix1.determinant();
 		assertEquals(determinant , 0);
 	}
+
+	@Test
+	public void determinantTest4by4() {
+		Matrix matrix = Matrix.initializeMatrix(4,4);
+		int[] rowFirst = {1,2,3,4};
+		int[] rowSecond = {2,3,4,5};
+		int[] rowThird = {2,3,4,7};
+		int[] rowFourth = {2,3,2,3};
+
+		matrix.populateByRow(0,rowFirst);
+		matrix.populateByRow(1,rowSecond);
+		matrix.populateByRow(2,rowThird);
+		matrix.populateByRow(3, rowFourth);
+		
+
+		int determinant = matrix.determinant();
+		assertEquals(-4,determinant);
+	}
+
+	@Test
+	public void determinantTest5by5() {
+		Matrix matrix = Matrix.initializeMatrix(5,5);
+		int[] rowFirst = {1,2,3,4,3};
+		int[] rowSecond = {2,3,4,5,4};
+		int[] rowThird = {2,3,4,7,5};
+		int[] rowFourth = {2,3,2,3,6};
+		int[] rowFifth = {1,2,3,0,7};
+
+		matrix.populateByRow(0,rowFirst);
+		matrix.populateByRow(1,rowSecond);
+		matrix.populateByRow(2,rowThird);
+		matrix.populateByRow(3, rowFourth);
+		matrix.populateByRow(4,rowFifth);
+
+		int determinant = matrix.determinant();
+		assertEquals(-24,determinant);
+	}
+
+	@Test
+	public void determinantTest10by10() {
+		Matrix matrix = Matrix.initializeMatrix(10,10);
+		int[] rowFirst = {1,2,3,4,3,2,3,4,5,6};
+		int[] rowSecond = {2,3,4,5,4,1,1,4,6,7};
+		int[] rowThird = {2,3,4,7,5,0,0,4,5,6};
+		int[] rowFourth = {2,3,2,3,6,9,6,7,4,2};
+		int[] rowFifth = {1,2,3,0,7,6,4,3,2,1};
+		int[] rowSixth = {1,2,3,2,3,4,5,3,4,5 };
+		int[] rowSeventh = {1,2,3,4,5,6,7,8,9,2};
+		int[] rowEighth = {2,3,4,2,3,5,6,0,0,1};
+		int[] rowNineth = {1,1,1,2,3,6,5,4,5,8};
+		int[] rowTenth = {2,3,4,5,3,1,2,1,3,2};
+
+		matrix.populateByRow(0,rowFirst);
+		matrix.populateByRow(1,rowSecond);
+		matrix.populateByRow(2,rowThird);
+		matrix.populateByRow(3, rowFourth);
+		matrix.populateByRow(4,rowFifth);
+		matrix.populateByRow(5,rowSixth);
+		matrix.populateByRow(6,rowSeventh);
+		matrix.populateByRow(7,rowEighth);
+		matrix.populateByRow(8,rowNineth);
+		matrix.populateByRow(9,rowTenth);
+
+		int determinant = matrix.determinant();
+		assertEquals(4464,determinant);
+	}
 }
