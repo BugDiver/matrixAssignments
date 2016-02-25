@@ -1,7 +1,7 @@
-import static org.junit.Assert.*;
 import org.junit.Test;
-import org.junit.*;
-import java.util.*;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class MatrixTest{
 	public void fillMatrixWithSampleValues(Matrix matrix){
@@ -16,14 +16,13 @@ public class MatrixTest{
 		matrix.addElement(9,2,2);
 	}
 	@Test
-	public void testinitializeMatrix(){
+	public void testInitializeMatrix(){
 		Matrix matrix1 = Matrix.initializeMatrix(3,3);
 		assertTrue(matrix1.isNullMatrix());
 	}
 	@Test
 	public void testPopulateMatrix(){
 		Matrix matrix1 = Matrix.initializeMatrix(3,3);
-		//siganture addElement(value ,rowPosition ,columnPosition);
 		matrix1.addElement(1,0,0);
 		matrix1.addElement(3,0,2);
 		matrix1.addElement(7,2,0);
@@ -57,7 +56,6 @@ public class MatrixTest{
 
 		Matrix matrix2 = matrix1.multiply(10);
 
-		//add two matrices
 		Matrix addition = matrix2.add(matrix1);
 
 		Matrix expected = Matrix.initializeMatrix(3,3);
@@ -76,6 +74,20 @@ public class MatrixTest{
 		
 	}
 	@Test
+	public void testRepresentationOfMatrix(){
+		Matrix matrix1 = Matrix.initializeMatrix(3,3);
+		fillMatrixWithSampleValues(matrix1);
+
+		String expected  = "1 2 3 \n" +
+						   "4 5 6 \n" +
+						   "7 8 9";
+		assertEquals(expected ,matrix1.toString());
+
+
+	}
+
+
+	@Test
 	public void testMultiplyTwoMatrices(){
 
 		Matrix matrix1 = Matrix.initializeMatrix(3,3);
@@ -83,7 +95,6 @@ public class MatrixTest{
 
 		Matrix matrix2 = matrix1.multiply(10);
 
-		//multiply two matrices
 		Matrix product = matrix2.multiply(matrix1);
 
 		Matrix expected = Matrix.initializeMatrix(3,3);
@@ -101,7 +112,7 @@ public class MatrixTest{
 		assertTrue(product.isEqualsTo(expected));	
 	}
 	@Test
-	public void testScalerMultiplication(){
+	public void testScalarMultiplication(){
 
 		Matrix matrix1 = Matrix.initializeMatrix(3,3);
 		fillMatrixWithSampleValues(matrix1);
@@ -179,7 +190,7 @@ public class MatrixTest{
 		int[] rowSixth = {1,2,3,2,3,4,5,3,4,5 };
 		int[] rowSeventh = {1,2,3,4,5,6,7,8,9,2};
 		int[] rowEighth = {2,3,4,2,3,5,6,0,0,1};
-		int[] rowNineth = {1,1,1,2,3,6,5,4,5,8};
+		int[] rowNinth = {1,1,1,2,3,6,5,4,5,8};
 		int[] rowTenth = {2,3,4,5,3,1,2,1,3,2};
 
 		matrix.populateByRow(0,rowFirst);
@@ -190,7 +201,7 @@ public class MatrixTest{
 		matrix.populateByRow(5,rowSixth);
 		matrix.populateByRow(6,rowSeventh);
 		matrix.populateByRow(7,rowEighth);
-		matrix.populateByRow(8,rowNineth);
+		matrix.populateByRow(8,rowNinth);
 		matrix.populateByRow(9,rowTenth);
 
 		int determinant = matrix.determinant();
