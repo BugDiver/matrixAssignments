@@ -63,6 +63,27 @@ public class MatrixTest{
 
 		assertTrue(matrix1.isEqualsTo(matrix2));
 	}
+
+	@Test
+	public void test_isEquals_should_return_false_row_and_col_are_unequal() {
+		Matrix<Integer> matrix1 =new  Matrix<>(3,2);
+		Integer[] row1 = {1,2};
+		Integer[] row2 = {2,4};
+		Integer[] row3 = {4,6};
+
+
+		matrix1.populateByRow(0,row1);
+		matrix1.populateByRow(1,row2);
+		matrix1.populateByRow(2,row3);
+
+		Matrix<Integer> matrix2 =new Matrix<>(1,3);
+		Integer[] sampleRow1 = {2,3,4};
+		matrix2.populateByRow(0,sampleRow1);
+
+		assertFalse(matrix1.isEqualsTo(matrix2));
+		assertFalse(matrix2.isEqualsTo(matrix2));
+	}
+
 	@Test
 	public void testAddTwoMatrices(){
 

@@ -24,15 +24,13 @@ class Matrix<T extends Number> {
         data[rowPosition][colPosition] = value;
     }
 
-    //
-//	public Number getElement(int rowPos , int colPos){
-//		return data[rowPos][colPos];
-//	}
     public void populateByRow(int position, T[] rowData) {
         System.arraycopy(rowData, 0, data[position], 0, col);
     }
 
     public boolean isEqualsTo(Matrix matrix) {
+        if (this.row != matrix.row || this.col != matrix.row)
+            return false;
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
                 if (!data[i][j].equals(matrix.data[i][j])) {
