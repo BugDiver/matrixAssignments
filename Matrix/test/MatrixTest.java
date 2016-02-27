@@ -3,7 +3,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class MatrixTest{
-	public void fillMatrixWithSampleValues(Matrix matrix){
+	public void fillMatrixWithSampleValues(Matrix<Integer> matrix){
 		matrix.addElement(1,0,0);
 		matrix.addElement(2,0,1);
 		matrix.addElement(3,0,2);
@@ -15,17 +15,17 @@ public class MatrixTest{
 		matrix.addElement(9,2,2);
 	}
 	@Test
-	public void testInitializeForIntegerTypeMatrix(){
+	public void test_initialize_for_integer_type_matrix(){
 		Matrix<Integer> matrix1 = new Matrix<>(3,3);
 		assertTrue(matrix1.isNullMatrix());
 	}
 	@Test
-	public void testInitializeForFloatTypeMatrix(){
+	public void test_initialize_for_float_type_matrix(){
 		Matrix<Integer> matrix1 = new Matrix<>(3,3);
 		assertTrue(matrix1.isNullMatrix());
 	}
 	@Test
-	public void testPopulateMatrix(){
+	public void test_populate_matrix(){
 		Matrix<Integer> matrix1 = new Matrix<>(3,3);
 		matrix1.addElement(1,0,0);
 		matrix1.addElement(3,0,2);
@@ -40,7 +40,7 @@ public class MatrixTest{
 	}
 
 	@Test
-	public void testPopulateMatrixForFloatType(){
+	public void test_populate_matrix_for_float_type(){
 		Matrix<Float> matrix1 = new Matrix<>(3,3);
 		matrix1.addElement(1.2,0,0);
 		matrix1.addElement(3.4,0,2);
@@ -54,9 +54,9 @@ public class MatrixTest{
 
 	}
 	@Test
-	public void testEqualityOfMatrices() {
+	public void test_equality_of_matrices() {
 		Matrix<Integer> matrix1 =new  Matrix<>(3,3);
-		Matrix<Float> matrix2 =new Matrix<>(3,3);
+		Matrix<Integer> matrix2 =new Matrix<>(3,3);
 
 		fillMatrixWithSampleValues(matrix1);
 		fillMatrixWithSampleValues(matrix2);
@@ -85,14 +85,37 @@ public class MatrixTest{
 	}
 
 	@Test
-	public void testAddTwoMatrices(){
+	public void test_add_should_throw_error_if_it_cant_add_matrices(){
+		Matrix<Integer> matrix1 =new  Matrix<>(3,2);
+		Integer[] row1 = {1,2};
+		Integer[] row2 = {2,4};
+		Integer[] row3 = {4,6};
+
+
+		matrix1.populateByRow(0,row1);
+		matrix1.populateByRow(1,row2);
+		matrix1.populateByRow(2,row3);
+
+		Matrix<Integer> matrix2 =new Matrix<>(1,3);
+		Integer[] sampleRow1 = {2,3,4};
+		matrix2.populateByRow(0,sampleRow1);
+
+		try {
+			matrix1.add(matrix2);
+		}catch (RuntimeException e){
+			assertEquals(e.getMessage() ,"unequal row or col length");
+		}
+	}
+
+	@Test
+	public void test_add_two_matrices(){
 
 		Matrix<Integer> matrix1 =new Matrix<>(3,3);
 		fillMatrixWithSampleValues(matrix1);
 
 		Matrix<Integer> matrix2 = matrix1.multiply(10);
 
-		Matrix addition = matrix2.add(matrix1);
+		Matrix<Integer> addition = matrix2.add(matrix1);
 
 		Matrix<Integer> expected =new Matrix<>(3,3);
 
@@ -110,7 +133,7 @@ public class MatrixTest{
 
 	}
 	@Test
-	public void testRepresentationOfMatrix(){
+	public void test_representation_of_matrix(){
 		Matrix<Integer> matrix1 =new Matrix<>(3,3);
 		fillMatrixWithSampleValues(matrix1);
 
@@ -122,7 +145,7 @@ public class MatrixTest{
 
 
 	@Test
-	public void testMultiplyTwoMatrices(){
+	public void test_multiply_two_matrices(){
 
 		Matrix<Integer> matrix1 =new  Matrix<>(3,3);
 		fillMatrixWithSampleValues(matrix1);
@@ -144,6 +167,30 @@ public class MatrixTest{
 		expected.addElement(1500,2,2);
 
 		assertTrue(product.isEqualsTo(expected));
+	}
+
+	@Test
+	public void test_multiply_two_matrices_can_through_error_if_it_cant_multiply(){
+
+		Matrix<Integer> matrix1 =new  Matrix<>(3,2);
+		Integer[] row1 = {1,2};
+		Integer[] row2 = {2,4};
+		Integer[] row3 = {4,6};
+
+
+		matrix1.populateByRow(0,row1);
+		matrix1.populateByRow(1,row2);
+		matrix1.populateByRow(2,row3);
+
+		Matrix<Integer> matrix2 =new Matrix<>(1,3);
+		Integer[] sampleRow1 = {2,3,4};
+		matrix2.populateByRow(0,sampleRow1);
+
+		try {
+			matrix1.multiply(matrix2);
+		}catch (RuntimeException e){
+			assertSame(e.getMessage() ,"inoperable row and column length");
+		}
 	}
 	@Test
 	public void testScalarMultiplication(){
@@ -167,6 +214,27 @@ public class MatrixTest{
 
 		assertTrue(scaledMatrix.isEqualsTo(expected));
 	}
+
+	@Test
+	public void test_determinant_can_throw_error_for_non_square_matrices(){
+		Matrix<Integer> matrix1 =new  Matrix<>(3,2);
+		Integer[] row1 = {1,2};
+		Integer[] row2 = {2,4};
+		Integer[] row3 = {4,6};
+
+
+		matrix1.populateByRow(0,row1);
+		matrix1.populateByRow(1,row2);
+		matrix1.populateByRow(2,row3);
+
+		try {
+			matrix1.determinant();
+		}catch (RuntimeException e){
+			assertSame(e.getMessage() ,"can't compute determinant of a non-square matrix");
+		}
+
+	}
+
 	@Test
 	public void testDeterminantOfMatrix(){
 		Matrix<Integer> matrix1 =new Matrix<>(3,3);

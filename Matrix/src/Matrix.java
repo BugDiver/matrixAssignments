@@ -28,8 +28,8 @@ class Matrix<T extends Number> {
         System.arraycopy(rowData, 0, data[position], 0, col);
     }
 
-    public boolean isEqualsTo(Matrix matrix) {
-        if (this.row != matrix.row || this.col != matrix.row)
+    public boolean isEqualsTo(Matrix<T> matrix) {
+        if (isUnequalRowColumn(matrix))
             return false;
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
@@ -39,6 +39,10 @@ class Matrix<T extends Number> {
             }
         }
         return true;
+    }
+
+    private boolean isUnequalRowColumn(Matrix<T> matrix) {
+        return (this.row != matrix.row || this.col != matrix.row);
     }
 
     public String toString() {
@@ -100,6 +104,8 @@ class Matrix<T extends Number> {
     }
 
     public Matrix<T> add(Matrix<T> other) {
+        if (isUnequalRowColumn(other))
+            throw new RuntimeException("unequal row or col length");
         Matrix<T> result = new Matrix<>(row, col);
         initializeWithZero(result);
         for (int i = 0; i < row; i++) {
@@ -111,7 +117,9 @@ class Matrix<T extends Number> {
         return result;
     }
 
-    public Matrix<T> multiply(Matrix matrix) {
+    public Matrix<T> multiply(Matrix<T> matrix) {
+        if(!canMultiply(matrix))
+            throw new RuntimeException("inoperable row and column length");
         Matrix<T> result = new Matrix<>(this.row, matrix.col);
         initializeWithZero(result);
         for (int i = 0; i < result.row; i++) {
@@ -123,6 +131,10 @@ class Matrix<T extends Number> {
             }
         }
         return result;
+    }
+
+    private boolean canMultiply(Matrix<T> matrix) {
+        return this.col == matrix.row;
     }
 
     public Matrix<T> multiply(Number scale) {
@@ -156,6 +168,8 @@ class Matrix<T extends Number> {
     public Number determinant() {
         Number result = 0;
         Number sign = 1;
+        if (!isSquareMatrix())
+            throw new RuntimeException("can't compute determinant of a non-square matrix");
         if (row == 1)
             return data[0][0];
         for (int i = 0; i < row; i++) {
@@ -165,6 +179,10 @@ class Matrix<T extends Number> {
             sign = changeSign(sign);
         }
         return result;
+    }
+
+    public boolean isSquareMatrix() {
+        return (this.row == this.col);
     }
 }
 
